@@ -1,7 +1,7 @@
 # Netease-lyrics-spider
 Usage:
 
-0. `git clone --recurse-submodules https://github.com/yuxguo/Netease-lyrics-spider.git`
+0. `git clone --recurse-submodules https://github.com/gpzlx1/Netease-lyrics-spider.git`
 
 1. `cd Netease-lyrics-spider && PROJECT_ROOT=$(pwd)`
 
