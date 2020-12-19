@@ -12,30 +12,43 @@ proxy_list = utils.get_proxy_list(fname="../configs/proxy_list.json")
 
 def worker(song_id):
 
-    request_url = "http://%s/lyric?id=%s" % (service_url, song_id)
+    request_lyric_url = "http://%s/lyric?id=%s" % (service_url, song_id)
+    request_title_url = "http://%s/search?keywords=%s" % (service_url, song_id)
     if proxy_list != []:
-        request_url += "&proxy=%s" % random.choice(proxy_list)
+        proxy = random.choice(proxy_list)
+        request_lyric_url += "&proxy=%s" % proxy
+        request_title_url += "&proxy=%s" % proxy
 
     # request api
     # TODO: use try ... expect ...
     try:
-        data = requests.get(request_url).text
+        lyric_data = requests.get(request_lyric_url).text
+        title_data = requests.get(request_title_url).text
     except requests.ConnectionError:
         return 
-    print(data)
+    # print(data)
 
     # decode json
-    data = json.loads(data).get("lrc", None)
-    if data is None:
-        return
-    data = data["lyric"]
+    lyric_data = json.loads(lyric_data)
+    title_data = json.loads(title_data)
 
-    # filter out timestamp
-    data = re.sub(r"\[.*\]", "", data)
+
+    if lyric_data.get("lrc", None) is None:
+        return
+
+    lyric = lyric_data["lrc"]["lyric"]
+
+    # filter out timestamp in lyric
+    lyric = re.sub(r"\[.*\]", "", lyric)
+
+    if title_data["result"]["songs"] == []:
+        return
+    
+    title = title_data["result"]["songs"][0]["name"]
 
     # write file
-    with open("../data/%s.txt" % song_id, "w") as f:
-        f.write(data)
+    with open("../data/%s_%s.txt" % (song_id, title), "w") as f:
+        f.write(lyric)
 
 
 def main():
