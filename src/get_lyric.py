@@ -9,9 +9,14 @@ service_url = "127.0.0.1:3000"
 song_list = utils.get_song_list(fname="../configs/song_list.json")
 proxy_list = utils.get_proxy_list(fname="../configs/proxy_list.json")
 
+def worker_try(song_id):
+    try:
+        worker(song_id)
+    except BaseException:
+        return 
+    return
 
 def worker(song_id):
-
     request_lyric_url = "http://%s/lyric?id=%s" % (service_url, song_id)
     request_title_url = "http://%s/search?keywords=%s" % (service_url, song_id)
     if proxy_list != []:
@@ -55,7 +60,7 @@ def worker(song_id):
 def main():
     # multiporcessing
     with multiprocessing.Pool(8) as p:
-        p.map(worker, song_list)
+        p.map(worker_try, song_list)
 
 
 if __name__ == "__main__":
