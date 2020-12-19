@@ -45,6 +45,7 @@ def worker(song_id):
         return
     
     title = title_data["result"]["songs"][0]["name"]
+    title = re.sub("[/*?:<>|\"\\\\]", "", title)
 
     # write file
     with open("../data/%s_%s.txt" % (song_id, title), "w") as f:
