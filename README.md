@@ -1,18 +1,24 @@
 # Netease-lyrics-spider
 Usage:
 
-0. `git clone --recurse-submodules https://github.com/gpzlx1/Netease-lyrics-spider.git`
+1. `git clone --recurse-submodules https://github.com/gpzlx1/Netease-lyrics-spider.git`
 
-1. `cd Netease-lyrics-spider && PROJECT_ROOT=$(pwd)`
+2. `cd Netease-lyrics-spider && PROJECT_ROOT=$(pwd)`
 
-2. `cd $PROJECT_ROOT/modules/NeteaseCloudMusicApi`
+3. `cd $PROJECT_ROOT/modules/NeteaseCloudMusicApi`
 
-3. `npm install && node app.js`
+4. `npm install && node app.js`
 
-4. `cd $PROJECT_ROOT/configs` and edit your song list and proxy list.
+5. `cd $PROJECT_ROOT/configs` and edit your song list and proxy list.
 
-5. `cd $PROJECT_ROOT/src`
+6. `cd $PROJECT_ROOT`
 
-6. `python get_lyric.py`
+7. `python3 src/get_lyric.py --src song_list.json --dst target_dir`.
 
-7. Data is saved at `$PROJECT_ROOT/data`
+    For example,
+
+    ```shell
+    python3 src/get_lyric.py --src configs/ballad-songs.json --dst data
+    ```
+
+    You also can use `--proxy true` to use Proxy. Data will be saved in the dir `target_dir`.
