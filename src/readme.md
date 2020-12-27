@@ -9,12 +9,13 @@ The pipeline to crawl songs from Netease Music
 3. run `get_lyric.py` to crawl lyrics from the song ids
 
 
-
-
-
-
-
 * ``song_list.py`` : to crawl playlist of different categories, modify the code of  `Netease_spider.originURL` and run.
 
 * `list2song.py` : to crawl the song ids of the playlist, says `rock-list.json`, modify the code in line 137 to `crawl = Netease_song("rock")` and run.
+
+* `get_lyric.py` :
+
+    ```shell
+    usage: get_lyric.py [-h] --src SRC --dst DST [--proxy PROXY]
+    ```
 
