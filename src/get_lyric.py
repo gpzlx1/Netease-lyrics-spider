@@ -8,8 +8,8 @@ import argparse
 
 
 parser = argparse.ArgumentParser(description='Netease lyrics spider')
-parser.add_argument('--src', type=str, required=True, help='song list waiting to be grabbed')
-parser.add_argument('--dst', default=str, type=True, help='where to store result')
+parser.add_argument('--src', default=str, required=True, help='song list waiting to be grabbed')
+parser.add_argument('--dst', default=str, required=True, help='where to store result')
 parser.add_argument('--proxy', default=False, type=bool, help='Use proxy or not')
 args = parser.parse_args()
 
