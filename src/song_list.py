@@ -5,7 +5,6 @@ import json
 import time
 import random
 
-
 class Netease_spider:
     def __init__(self, comment="base"):
         self.comment = comment
