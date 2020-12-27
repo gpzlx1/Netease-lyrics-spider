@@ -15,7 +15,7 @@ args = parser.parse_args()
 
 
 service_url = "127.0.0.1:3000"
-song_list = utils.get_song_list(fname=arg.src)
+song_list = utils.get_song_list(fname=args.src)
 
 proxy_list = []
 if args.proxy:
