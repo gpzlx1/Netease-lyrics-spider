@@ -19,7 +19,7 @@ song_list = utils.get_song_list(fname=args.src)
 
 proxy_list = []
 if args.proxy:
-    proxy_list = utils.get_proxy_list(fname="../configs/proxy_list.json")
+    proxy_list = utils.get_proxy_list(fname="./configs/proxy_list.json")
 
 def worker_try(song_id):
     try:
