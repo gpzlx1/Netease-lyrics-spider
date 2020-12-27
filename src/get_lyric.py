@@ -4,10 +4,22 @@ import requests
 import multiprocessing
 import random
 import re
+import argparse
+
+
+parser = argparse.ArgumentParser(description='Netease lyrics spider')
+parser.add_argument('--src', type=str, required=True, help='song list waiting to be grabbed')
+parser.add_argument('--dst', default=str, type=True, help='where to store result')
+parser.add_argument('--proxy', default=False, type=bool, help='Use proxy or not')
+args = parser.parse_args()
+
 
 service_url = "127.0.0.1:3000"
-song_list = utils.get_song_list(fname="../configs/song_list.json")
-proxy_list = utils.get_proxy_list(fname="../configs/proxy_list.json")
+song_list = utils.get_song_list(fname=arg.src)
+
+proxy_list = []
+if args.proxy:
+    proxy_list = utils.get_proxy_list(fname="../configs/proxy_list.json")
 
 def worker_try(song_id):
     try:
@@ -53,7 +65,7 @@ def worker(song_id):
     title = re.sub("[/*?:<>|\"\\\\]", "", title)
 
     # write file
-    with open("../data/%s_%s.txt" % (song_id, title), "w") as f:
+    with open(args.dst + "/%s_%s.txt" % (song_id, title), "w") as f:
         f.write(lyric)
 
 
